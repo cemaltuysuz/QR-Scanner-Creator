@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">QR Reader &amp; Creator</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="homeFragmentButtonScan">QR Scan</string>
+    <string name="homeFragmentButtonGenerate">QR Generate</string>
+    <string name="homeFragmentOr">Or</string>
+</resources>

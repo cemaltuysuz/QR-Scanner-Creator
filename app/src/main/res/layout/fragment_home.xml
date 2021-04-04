@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.fragments.homeFragment">
+
+    <LinearLayout
+        android:id="@+id/homeFragmentTopLayout"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/home_fragment_topback">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/userPhoto"
+            android:background="@color/black"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/homeFragmentTopLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:text="@string/homeFragmentButtonScan"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:background="@drawable/home_button_background"/>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:textSize="17sp"
+            android:textColor="@color/blackTn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/homeFragmentOr"/>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:text="@string/homeFragmentButtonGenerate"
+            android:layout_marginTop="20dp"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:background="@drawable/home_button_background"/>
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>
