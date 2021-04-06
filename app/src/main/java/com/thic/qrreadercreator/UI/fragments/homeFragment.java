@@ -31,7 +31,7 @@ public class homeFragment extends Fragment {
 
     private static boolean mPermissionGranted;
     private AppCompatImageView openListButton;
-    private AppCompatButton scanButton;
+    private AppCompatButton scanButton,generateButton;
     public homeFragment() {
     }
 
@@ -48,6 +48,15 @@ public class homeFragment extends Fragment {
 
         openListButton = root.findViewById(R.id.homeOpenList);
         scanButton = root.findViewById(R.id.QrScanButton);
+        generateButton = root.findViewById(R.id.QrGenerateButton);
+
+
+        generateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(root).navigate(R.id.home_to_generate);
+            }
+        });
 
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override

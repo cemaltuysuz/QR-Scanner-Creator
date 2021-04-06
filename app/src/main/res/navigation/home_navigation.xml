@@ -12,13 +12,16 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/home_to_scan"
-            app:destination="@id/scanFragment" />
+            app:destination="@id/scanFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
         <action
             android:id="@+id/home_to_generate"
-            app:destination="@id/generateFragment" />
+            app:destination="@id/generateFragment"
+            app:enterAnim="@anim/slide_in_right" />
         <action
             android:id="@+id/home_to_listhome"
-            app:destination="@id/homeListFragment" />
+            app:destination="@id/homeListFragment"
+            app:enterAnim="@android:anim/fade_in" />
     </fragment>
     <fragment
         android:id="@+id/scanFragment"
@@ -27,7 +30,11 @@
         tools:layout="@layout/fragment_scan" >
         <action
             android:id="@+id/scan_to_home"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_right" />
+        <action
+            android:id="@+id/action_scanFragment_to_bottomSheet"
+            app:destination="@id/bottomSheet" />
     </fragment>
     <fragment
         android:id="@+id/generateFragment"
@@ -36,7 +43,11 @@
         tools:layout="@layout/fragment_generate" >
         <action
             android:id="@+id/generate_to_home"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_generateFragment_to_bottomSheet"
+            app:destination="@id/bottomSheet" />
     </fragment>
     <fragment
         android:id="@+id/homeListFragment"
@@ -45,6 +56,19 @@
         tools:layout="@layout/fragment_home_list" >
         <action
             android:id="@+id/listhome_to_home"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/fragment_fade_enter" />
     </fragment>
+    <dialog
+        android:id="@+id/bottomSheet"
+        android:name="com.thic.qrreadercreator.UI.fragments.bottomSheet"
+        android:label="fragment_bottom_sheet"
+        tools:layout="@layout/fragment_bottom_sheet" >
+        <action
+            android:id="@+id/action_bottomSheet_to_scanFragment"
+            app:destination="@id/scanFragment" />
+        <action
+            android:id="@+id/action_bottomSheet_to_generateFragment"
+            app:destination="@id/generateFragment" />
+    </dialog>
 </navigation>

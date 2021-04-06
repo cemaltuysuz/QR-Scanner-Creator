@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".UI.fragments.bottomSheet"
+    android:background="@drawable/bottom_sheet_back"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="18dp">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:src="@drawable/qr"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/roundedQRBottomSheet"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        app:riv_border_width="4dp"
+        app:riv_border_color="@color/blackTn"
+        app:riv_corner_radius="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:hint="value"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:id="@+id/QrValueBottomsheet"/>
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_marginRight="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_share"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_save"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_marginLeft="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_copy"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
