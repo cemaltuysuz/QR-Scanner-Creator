@@ -14,36 +14,21 @@ public interface QrDAO {
 
     // Insert
     @Insert
-    void scanInsert (ScanModel scanModel);
-
-    @Insert
-    void generateInsert (GenerateModel generateModel);
+    void modelInsert (model model);
 
     // Update
     @Update
-    void scanUpdate (ScanModel scanModel);
-
-    @Update
-    void generateUpdate (GenerateModel generateModel);
+    void modelUpdate (model model);
 
     //Delete
     @Delete
-    void scanDel (ScanModel scanModel);
-
-    @Delete
-    void generateDel (GenerateModel generateModel);
+    void modelDel (model model);
 
     // QUERY
+    @Query("DELETE FROM qr_table")
+    void modelTableDel();
 
-    @Query("DELETE FROM scan_table")
-    void scanTableDel();
+    @Query("SELECT * FROM qr_table")
+    LiveData<List<model>> getmodelTable();
 
-    @Query("DELETE FROM generate_table")
-    void generateTableDel();
-
-    @Query("SELECT * FROM scan_table")
-    LiveData<List<ScanModel>> getScanTable();
-
-    @Query("SELECT * FROM generate_table")
-    LiveData<List<GenerateModel>> getGenerateTable();
 }

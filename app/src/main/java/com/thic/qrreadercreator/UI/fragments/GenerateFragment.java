@@ -14,8 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+
+import com.thic.qrreadercreator.Model.model;
 import com.thic.qrreadercreator.R;
-import com.thic.qrreadercreator.Viewmodel.UIViewmodel;
+import com.thic.qrreadercreator.Viewmodel.QrViewmodel;
 
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
@@ -24,8 +26,9 @@ public class GenerateFragment extends Fragment {
 
     private EditText inputValue;
     private QRGEncoder encoder;
-    private static String input;
+    private static String qrinput;
     private static Bitmap qrCode;
+    private QrViewmodel viewmodel;
     AppCompatImageView okeyButton,QrView,backButton;
 
     public GenerateFragment() {
@@ -34,6 +37,7 @@ public class GenerateFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewmodel = new ViewModelProvider(requireActivity()).get(QrViewmodel.class);
     }
 
     @Override
@@ -54,8 +58,8 @@ public class GenerateFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                input = s.toString();
-                encoder = new QRGEncoder(input,null, QRGContents.Type.TEXT,500);
+                qrinput = s.toString();
+                encoder = new QRGEncoder(qrinput,null, QRGContents.Type.TEXT,500);
                 qrCode = encoder.getBitmap();
                 QrView.setImageBitmap(qrCode);
             }
@@ -76,6 +80,8 @@ public class GenerateFragment extends Fragment {
             public void onClick(View v) {
 
                 if (inputValue.getText().toString().trim() != ""){
+
+                    viewmodel.setPushDataModel(new model(qrinput," "," ",false));
                     Navigation.findNavController(root).navigate(R.id.action_generateFragment_to_bottomSheet);
 
                 }

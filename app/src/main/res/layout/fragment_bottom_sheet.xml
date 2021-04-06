@@ -42,17 +42,20 @@
             android:gravity="center">
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bottomSheetShare"
                 android:layout_marginRight="10dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/ic_share"/>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bottomSheetSave"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/ic_save"/>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bottomSheetCopy"
                 android:layout_marginLeft="10dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"

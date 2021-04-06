@@ -9,7 +9,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {GenerateModel.class,ScanModel.class},version = 1)
+@Database(entities = {model.class},version = 1)
 public abstract class QrDatabase extends RoomDatabase {
 
     private static String database_name = "qrDatabase";
@@ -31,8 +31,7 @@ public abstract class QrDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-            new PopulateDbAsyncTask(instance).execute();
-        }
+            new PopulateDbAsyncTask(instance).execute(); }
     };
 
     private static class PopulateDbAsyncTask extends AsyncTask<Void,Void,Void>{

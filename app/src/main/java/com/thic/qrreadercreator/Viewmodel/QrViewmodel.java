@@ -5,58 +5,47 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
-import com.thic.qrreadercreator.Model.GenerateModel;
 import com.thic.qrreadercreator.Model.QrRepository;
-import com.thic.qrreadercreator.Model.ScanModel;
-
+import com.thic.qrreadercreator.Model.model;
 import java.util.List;
-import java.util.Scanner;
+
 
 public class QrViewmodel extends AndroidViewModel {
 
     private QrRepository repository;
-    private LiveData<List<ScanModel>> allScanNote;
-    private LiveData<List<GenerateModel>> allGenerateModel;
+    private LiveData<List<model>> allModel;
 
     public QrViewmodel(@NonNull Application application) {
         super(application);
-
         repository = new QrRepository(application);
-        allScanNote = repository.getAllScan();
-        allGenerateModel = repository.getAllGenerate();
-
+        allModel = repository.getAllModel();
     }
 
-    public void insertS (ScanModel scanModel){
-        repository.insertS(scanModel);
+    public void insert(model model){
+        repository.insert(model);
     }
-    public void updateS(ScanModel scanModel){
-        repository.updateS(scanModel);
+    public void update(model model){
+        repository.update(model);
     }
-    public void delS(ScanModel scanModel){
-        repository.deleteS(scanModel);
+    public void del(model model){
+        repository.delete(model);
     }
-    public void delAllS(){
-        repository.deleteAllS();
+    public void delAll(){
+        repository.deleteAll();
     }
-    public LiveData<List<ScanModel>> getAllScanNote(){
-        return allScanNote;
+    public LiveData<List<model>> getAllNote(){
+        return allModel;
     }
 
-    public void insertG (GenerateModel generateModel){
-        repository.insertG(generateModel);
+    MutableLiveData<model> pushDataModel = new MutableLiveData<>();
+
+    public model getPushDataModel() {
+        return this.pushDataModel.getValue();
     }
-    public void updateG(GenerateModel generateModel){
-        repository.updateG(generateModel);
-    }
-    public void delG(GenerateModel generateModel){
-        repository.deleteG(generateModel);
-    }
-    public void delAllG(){
-        repository.deleteAllG();
-    }
-    public LiveData<List<GenerateModel>> getAllGenerateModel(){
-        return allGenerateModel;
+
+    public void setPushDataModel(model model) {
+        this.pushDataModel.setValue(model);
     }
 }

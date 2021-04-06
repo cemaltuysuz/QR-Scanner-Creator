@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
+import com.thic.qrreadercreator.Model.model;
 import com.thic.qrreadercreator.R;
 import com.thic.qrreadercreator.Viewmodel.QrViewmodel;
 
@@ -32,6 +34,7 @@ public class ScanFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewmodel = new ViewModelProvider(requireActivity()).get(QrViewmodel.class);
     }
 
     @Override
@@ -47,7 +50,8 @@ public class ScanFragment extends Fragment {
 
                 activity.runOnUiThread(new Runnable() {
                     public void run() {
-                        Toast.makeText(activity.getApplicationContext(), result.getText(), Toast.LENGTH_SHORT).show();
+                        viewmodel.setPushDataModel(new model(result.getText()," "," ",true));
+                        Navigation.findNavController(root).navigate(R.id.action_scanFragment_to_bottomSheet);
                     }
                 });
             }
@@ -61,6 +65,7 @@ public class ScanFragment extends Fragment {
 
         return root;
     }
+
     @Override
     public void onResume() {
         super.onResume();
