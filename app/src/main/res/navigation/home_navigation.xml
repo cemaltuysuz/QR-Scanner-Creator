@@ -65,7 +65,7 @@
         android:label="fragment_bottom_sheet"
         tools:layout="@layout/fragment_bottom_sheet" >
         <action
-            android:id="@+id/action_bottomSheet_to_scanFragment"
+            android:id="@+id/bottomsheet_to_scan"
             app:destination="@id/scanFragment" />
         <action
             android:id="@+id/action_bottomSheet_to_generateFragment"

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="130dp"
+    android:padding="20dp">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:src="@drawable/qr"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/priv_count_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        app:riv_border_width="4dp"
+        app:riv_border_color="@color/blackTn"
+        app:riv_corner_radius="10dp"/>
+
+    <TextView
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Description"
+        android:paddingLeft="15dp"
+        android:id="@+id/priv_count_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/priv_count_image" />
+
+    <TextView
+        android:id="@+id/priv_count_value"
+        android:paddingTop="12dp"
+        android:layout_below="@+id/priv_count_description"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@+id/priv_count_image"
+        android:paddingLeft="15dp"
+        android:text="Value"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/priv_count_date"
+        android:layout_alignParentRight="true"
+        android:text="DateTime"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

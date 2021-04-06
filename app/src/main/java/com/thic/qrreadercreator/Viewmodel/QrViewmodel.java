@@ -40,6 +40,15 @@ public class QrViewmodel extends AndroidViewModel {
     }
 
     MutableLiveData<model> pushDataModel = new MutableLiveData<>();
+    MutableLiveData<Boolean>progressShow = new MutableLiveData<>();
+
+    public MutableLiveData<Boolean> getProgressShow() {
+        return this.progressShow;
+    }
+
+    public void setProgressShow(Boolean bool) {
+        this.progressShow.setValue(bool);
+    }
 
     public model getPushDataModel() {
         return this.pushDataModel.getValue();
