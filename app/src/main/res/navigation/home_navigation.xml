@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.thic.qrreadercreator.UI.fragments.homeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/home_to_scan"
+            app:destination="@id/scanFragment" />
+        <action
+            android:id="@+id/home_to_generate"
+            app:destination="@id/generateFragment" />
+        <action
+            android:id="@+id/home_to_listhome"
+            app:destination="@id/homeListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scanFragment"
+        android:name="com.thic.qrreadercreator.UI.fragments.ScanFragment"
+        android:label="fragment_scan"
+        tools:layout="@layout/fragment_scan" >
+        <action
+            android:id="@+id/scan_to_home"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/generateFragment"
+        android:name="com.thic.qrreadercreator.UI.fragments.GenerateFragment"
+        android:label="fragment_generate"
+        tools:layout="@layout/fragment_generate" >
+        <action
+            android:id="@+id/generate_to_home"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeListFragment"
+        android:name="com.thic.qrreadercreator.UI.fragments.homeListFragment"
+        android:label="fragment_home_list"
+        tools:layout="@layout/fragment_home_list" >
+        <action
+            android:id="@+id/listhome_to_home"
+            app:destination="@id/homeFragment" />
+    </fragment>
+</navigation>

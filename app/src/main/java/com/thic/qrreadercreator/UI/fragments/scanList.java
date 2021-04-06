@@ -10,21 +10,22 @@ import android.view.ViewGroup;
 
 import com.thic.qrreadercreator.R;
 
-public class GenerateFragment extends Fragment {
+public class scanList extends Fragment {
 
 
-    public GenerateFragment() {
+    public scanList() {
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_generate, container, false);
-        return root;
+        return inflater.inflate(R.layout.fragment_scan_list, container, false);
     }
 }

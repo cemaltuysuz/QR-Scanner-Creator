@@ -5,4 +5,6 @@
     <string name="homeFragmentButtonScan">QR Scan</string>
     <string name="homeFragmentButtonGenerate">QR Generate</string>
     <string name="homeFragmentOr">Or</string>
+    <string name="scanList">Scanned</string>
+    <string name="generateList">Generated</string>
 </resources>

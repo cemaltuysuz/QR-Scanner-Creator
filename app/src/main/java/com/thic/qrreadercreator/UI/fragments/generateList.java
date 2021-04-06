@@ -8,23 +8,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.thic.qrreadercreator.Model.adapters.slideAdapter;
 import com.thic.qrreadercreator.R;
 
-public class GenerateFragment extends Fragment {
+public class generateList extends Fragment {
 
 
-    public GenerateFragment() {
+    public generateList() {
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_generate, container, false);
-        return root;
+        return inflater.inflate(R.layout.fragment_generate_list, container, false);
     }
 }

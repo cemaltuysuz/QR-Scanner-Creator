@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UI.fragments.homeFragment">
 
     <LinearLayout
@@ -14,15 +15,17 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/home_fragment_topback">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:id="@+id/userPhoto"
-            android:background="@color/black"/>
-
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/blackTn"/>
     </LinearLayout>
 
     <LinearLayout
+        android:layout_above="@+id/bottomsheetLayout"
         android:layout_below="@+id/homeFragmentTopLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,13 +33,15 @@
         android:gravity="center">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/QrScanButton"
+            android:textAllCaps="false"
             android:text="@string/homeFragmentButtonScan"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:background="@drawable/home_button_background"/>
 
         <TextView
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:textSize="17sp"
             android:textColor="@color/blackTn"
             android:layout_width="wrap_content"
@@ -46,16 +51,29 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
+            android:textAllCaps="false"
             android:text="@string/homeFragmentButtonGenerate"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:background="@drawable/home_button_background"/>
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottomsheetLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_marginBottom="5dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/ic_up"
+            android:id="@+id/homeOpenList"/>
 
-
-
+    </LinearLayout>
 </RelativeLayout>

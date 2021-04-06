@@ -24,11 +24,9 @@ public class QrRepository {
     public void insertS (ScanModel scanModel){
         new InsertScanAsyncTask(qrDAO).execute(scanModel);
     }
-
     public void updateS (ScanModel scanModel){
         new UpdateScanAsyncTask(qrDAO).execute(scanModel);
     }
-
     public void deleteS (ScanModel scanModel){
         new DeleteScanAsyncTask(qrDAO).execute(scanModel);
     }
@@ -40,11 +38,9 @@ public class QrRepository {
     public void insertG (GenerateModel generateModel){
         new InsertGenerateAsyncTask(qrDAO).execute(generateModel);
     }
-
     public void updateG (GenerateModel generateModel){
         new UpdateGenerateAsyncTask(qrDAO).execute(generateModel);
     }
-
     public void deleteG (GenerateModel generateModel){
         new DeleteGenerateAsyncTask(qrDAO).execute(generateModel);
     }
@@ -57,7 +53,6 @@ public class QrRepository {
     public LiveData<List<ScanModel>> getAllScan(){
         return AllScan;
     }
-
     public LiveData<List<GenerateModel>> getAllGenerate(){
         return AllGenerate;
     }
@@ -74,7 +69,6 @@ public class QrRepository {
             return null;
         }
     }
-
     private static class UpdateScanAsyncTask extends AsyncTask<ScanModel,Void,Void>{
         private QrDAO qrDAO;
         private UpdateScanAsyncTask(QrDAO qrDAO){
@@ -86,7 +80,6 @@ public class QrRepository {
             return null;
         }
     }
-
     private static class DeleteScanAsyncTask extends AsyncTask<ScanModel,Void,Void>{
         private QrDAO qrDAO;
         private DeleteScanAsyncTask(QrDAO qrDAO){
@@ -98,7 +91,6 @@ public class QrRepository {
             return null;
         }
     }
-
     private static class DeleteAllScanAsyncTask extends AsyncTask<ScanModel,Void,Void>{
         private QrDAO qrDAO;
         private DeleteAllScanAsyncTask(QrDAO qrDAO){
@@ -122,7 +114,6 @@ public class QrRepository {
             return null;
         }
     }
-
     private static class DeleteGenerateAsyncTask extends AsyncTask<GenerateModel,Void,Void>{
         private QrDAO qrDAO;
         private DeleteGenerateAsyncTask(QrDAO qrDAO){
@@ -134,7 +125,6 @@ public class QrRepository {
             return null;
         }
     }
-
     private static class UpdateGenerateAsyncTask extends AsyncTask<GenerateModel,Void,Void>{
         private QrDAO qrDAO;
         private UpdateGenerateAsyncTask(QrDAO qrDAO){
@@ -146,7 +136,6 @@ public class QrRepository {
             return null;
         }
     }
-
     private static class DeleteAllGenerateAsyncTask extends AsyncTask<GenerateModel,Void,Void>{
         private QrDAO qrDAO;
         private DeleteAllGenerateAsyncTask(QrDAO qrDAO){
