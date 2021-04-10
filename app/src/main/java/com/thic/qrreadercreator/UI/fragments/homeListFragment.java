@@ -10,22 +10,19 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
-import com.thic.qrreadercreator.Model.QrRepository;
-import com.thic.qrreadercreator.Model.adapters.recyclerViewAdapter;
+import com.thic.qrreadercreator.Model.adapters.adapterGenerate;
+import com.thic.qrreadercreator.Model.adapters.adapterScan;
 import com.thic.qrreadercreator.Model.adapters.slideAdapter;
 import com.thic.qrreadercreator.Model.model;
 import com.thic.qrreadercreator.R;
 import com.thic.qrreadercreator.Viewmodel.QrViewmodel;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +35,10 @@ public class homeListFragment extends Fragment {
     TabLayout tabLayout;
     QrViewmodel viewmodel;
     private Toolbar toolbar;
-    private recyclerViewAdapter viewAdapter;
+
+    //Adapters Control
+    private adapterScan scanAdapter;
+    private adapterGenerate generateAdapter;
 
     public homeListFragment() {
     }
@@ -51,7 +51,8 @@ public class homeListFragment extends Fragment {
         fmList.add(new generateList());
         adapter = new slideAdapter(getParentFragmentManager(),fmList);
         viewmodel = new ViewModelProvider(this).get(QrViewmodel.class);
-        viewAdapter = new recyclerViewAdapter();
+        scanAdapter = new adapterScan();
+        generateAdapter = new adapterGenerate();
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,25 +80,25 @@ public class homeListFragment extends Fragment {
                 switch (item.getItemId()){
                     case R.id.toolbarIconClose:
                         QrViewmodel.actionModeİsActive.setValue(false);
-                        recyclerViewAdapter.selectedListAdapter.clear();
-                        viewAdapter.notifyDataSetChanged();
-                        toolbar.setTitle("");
+                        adapterScan.selectedListAdapter.clear();
+                        generateAdapter.selectedItemList.clear();
+                        scanAdapter.notifyDataSetChanged();
                         break;
-                    case R.id.toolbarIconShare:
-                        share();
-                        break;
-                    case R.id.toolbarIconDelete:
-                        List<model>newList = recyclerViewAdapter.selectedListAdapter;
+
+                        case R.id.toolbarIconDelete:
+                        List<model>newList = new ArrayList<>();
+                        newList.addAll(adapterScan.selectedListAdapter);
+                        newList.addAll(adapterGenerate.selectedItemList);
                         if (newList.size()>0){
                           for (int i =0;i<newList.size();i++){
                               viewmodel.del(newList.get(i));
                           }
                           newList.clear();
-                          recyclerViewAdapter.selectedListAdapter.clear();
-                          toolbar.setTitle("");
+                          QrViewmodel.actionModeİsActive.setValue(false);
+                          adapterScan.selectedListAdapter.clear();
+                          adapterGenerate.selectedItemList.clear();
                         }
                 }
-                
                 return false;
             }
         });
@@ -112,16 +113,6 @@ public class homeListFragment extends Fragment {
                 }
             }
         });
-
-        QrViewmodel.getSelectedList().observe(getViewLifecycleOwner(), new Observer<List<model>>() {
-            @Override
-            public void onChanged(List<model> models) {
-                Toast.makeText(getActivity(),String.valueOf(models.size()),Toast.LENGTH_SHORT).show();
-                toolbar.setTitle(viewmodel.toolbarTitle());
-            }
-        });
-
-
         closeListHome = root.findViewById(R.id.homeCloseList);
 
         closeListHome.setOnClickListener(new View.OnClickListener() {
@@ -139,11 +130,6 @@ public class homeListFragment extends Fragment {
                 }
             }
         });
-
-
         return root;
-    }
-    public void share(){
-
     }
 }

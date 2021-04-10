@@ -31,4 +31,9 @@ public interface QrDAO {
     @Query("SELECT * FROM qr_table")
     LiveData<List<model>> getmodelTable();
 
+    @Query("SELECT * FROM qr_table WHERE isScan=1")
+    LiveData<List<model>> getScanList();
+
+    @Query("SELECT * FROM qr_table WHERE isScan=0")
+    LiveData<List<model>> getGenerateList();
 }

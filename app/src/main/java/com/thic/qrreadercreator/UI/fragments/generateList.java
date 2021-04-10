@@ -12,7 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.thic.qrreadercreator.Model.adapters.recyclerViewAdapter;
+import com.thic.qrreadercreator.Model.adapters.adapterGenerate;
+import com.thic.qrreadercreator.Model.adapters.adapterScan;
 import com.thic.qrreadercreator.Model.model;
 import com.thic.qrreadercreator.R;
 import com.thic.qrreadercreator.Viewmodel.QrViewmodel;
@@ -23,11 +24,10 @@ public class generateList extends Fragment {
 
     private QrViewmodel viewmodel;
     private RecyclerView recyclerViewG;
-    private recyclerViewAdapter adapterG;
+    private adapterGenerate adapterG;
 
     public generateList() {
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,19 +43,19 @@ public class generateList extends Fragment {
         recyclerViewG = root.findViewById(R.id.recyclerview_GenerateList);
         recyclerViewG.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerViewG.setHasFixedSize(true);
-        adapterG = new recyclerViewAdapter(false);
+        adapterG = new adapterGenerate();
         recyclerViewG.setAdapter(adapterG);
         QrViewmodel.actionModeİsActive.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                recyclerViewAdapter.actionActive = aBoolean;
+                adapterGenerate.actionActive = aBoolean;
                 adapterG.notifyDataSetChanged();
             }
         });
-        viewmodel.getAllNote().observe(getViewLifecycleOwner(), new Observer<List<model>>() {
+        viewmodel.getAllGenerateModel().observe(getViewLifecycleOwner(), new Observer<List<model>>() {
             @Override
             public void onChanged(List<model> models) {
-                adapterG.setQR(models,false);
+                adapterG.setQR(models);
             }
         });
 

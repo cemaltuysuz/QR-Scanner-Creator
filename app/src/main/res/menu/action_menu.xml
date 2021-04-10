@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:title="Share"
-        android:id="@+id/toolbarIconShare"
-        android:icon="@drawable/ic_share_grey"
-        app:showAsAction="always"/>
-
-    <item
         android:title="Delete"
         android:id="@+id/toolbarIconDelete"
         android:icon="@drawable/ic_delete"

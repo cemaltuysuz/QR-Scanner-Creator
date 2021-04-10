@@ -11,11 +11,15 @@ public class QrRepository {
 
     private QrDAO qrDAO ;
     public static LiveData<List<model>> Allmodel;
+    public static LiveData<List<model>> AllScanModel;
+    public static LiveData<List<model>> AllGenerateModel;
 
     public QrRepository(Application application){
         QrDatabase database = QrDatabase.database(application);
          qrDAO = database.qrDAO();
          Allmodel = qrDAO.getmodelTable();
+         AllScanModel = qrDAO.getScanList();
+         AllGenerateModel = qrDAO.getGenerateList();
     }
 
     // Actions
@@ -36,6 +40,14 @@ public class QrRepository {
     // LiveData Lists
     public LiveData<List<model>> getAllModel(){
         return Allmodel;
+    }
+
+    public LiveData<List<model>> getAllScanModel(){
+        return AllScanModel;
+    }
+
+    public LiveData<List<model>> getAllGenerateModel(){
+        return AllGenerateModel;
     }
 
     // AsyncTasks

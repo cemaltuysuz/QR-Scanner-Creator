@@ -11,14 +11,11 @@ public class model {
     private int qrID;
 
     private String value;
-
     private String description;
-
     private String dateTime;
+    private int isScan;
 
-    private boolean isScan;
-
-    public model(String value, String description, String dateTime, boolean isScan) {
+    public model(String value, String description, String dateTime, int isScan) {
         this.value = value;
         this.description = description;
         this.dateTime = dateTime;
@@ -53,7 +50,7 @@ public class model {
         return dateTime;
     }
 
-    public boolean isScan() {
+    public int isScan() {
         return isScan;
     }
 }

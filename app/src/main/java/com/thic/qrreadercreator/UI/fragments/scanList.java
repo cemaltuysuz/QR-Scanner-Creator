@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.thic.qrreadercreator.Model.adapters.recyclerViewAdapter;
+import com.thic.qrreadercreator.Model.adapters.adapterScan;
 import com.thic.qrreadercreator.Model.model;
 import com.thic.qrreadercreator.R;
 import com.thic.qrreadercreator.Viewmodel.QrViewmodel;
@@ -22,7 +22,7 @@ import java.util.List;
 public class scanList extends Fragment {
 
     private RecyclerView recyclerViewS;
-    private recyclerViewAdapter adapterS;
+    private adapterScan adapterS;
     private QrViewmodel viewmodel;
 
     public scanList() {
@@ -44,20 +44,20 @@ public class scanList extends Fragment {
         recyclerViewS = root.findViewById(R.id.recyclerview_ScanList);
         recyclerViewS.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerViewS.setHasFixedSize(true);
-        adapterS = new recyclerViewAdapter(true);
+        adapterS = new adapterScan();
         recyclerViewS.setAdapter(adapterS);
 
-        viewmodel.getAllNote().observe(getViewLifecycleOwner(), new Observer<List<model>>() {
+        viewmodel.getAllScanModel().observe(getViewLifecycleOwner(), new Observer<List<model>>() {
             @Override
             public void onChanged(List<model> models) {
-                adapterS.setQR(models,true);
+                adapterS.setQR(models);
             }
         });
 
         QrViewmodel.actionModeİsActive.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                recyclerViewAdapter.actionActive = aBoolean;
+                adapterScan.actionActive = aBoolean;
                 adapterS.notifyDataSetChanged();
             }
         });

@@ -141,6 +141,7 @@ public class bottomSheet extends BottomSheetDialogFragment {
                         incomingData.setDateTime(currentDate());
                         viewmodel.insert(incomingData);
                     }
+                    Toast.makeText(getActivity(),"Saved",Toast.LENGTH_SHORT).show();
             }
         });
 

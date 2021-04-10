@@ -50,7 +50,7 @@ public class ScanFragment extends Fragment {
 
                 activity.runOnUiThread(new Runnable() {
                     public void run() {
-                        viewmodel.setPushDataModel(new model(result.getText()," "," ",true));
+                        viewmodel.setPushDataModel(new model(result.getText()," "," ",1));
                         Navigation.findNavController(root).navigate(R.id.action_scanFragment_to_bottomSheet);
                     }
                 });

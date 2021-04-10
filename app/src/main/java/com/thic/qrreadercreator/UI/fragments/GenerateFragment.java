@@ -88,7 +88,7 @@ public class GenerateFragment extends Fragment {
             public void onClick(View v) {
 
                 if (!inputValue.getText().toString().trim().isEmpty()){
-                    viewmodel.setPushDataModel(new model(qrinput," "," ",false));
+                    viewmodel.setPushDataModel(new model(qrinput," "," ",0));
                     Navigation.findNavController(root).navigate(R.id.action_generateFragment_to_bottomSheet);
                 }
             }
