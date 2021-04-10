@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    android:background="?android:selectableItemBackground"
+    android:id="@+id/priv_count_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="130dp"
-    android:padding="20dp">
+    android:padding="15dp"
+    android:clickable="true">
 
     <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
         android:src="@drawable/qr"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/priv_count_image"
@@ -13,6 +19,13 @@
         app:riv_border_width="4dp"
         app:riv_border_color="@color/blackTn"
         app:riv_corner_radius="10dp"/>
+
+    <CheckBox
+        android:id="@+id/priv_count_checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"/>
 
     <TextView
         android:textSize="18sp"

@@ -39,7 +39,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center">
 
@@ -51,6 +51,16 @@
             android:gravity="center"
             android:id="@+id/QrValueBottomsheet"/>
 
+        <EditText
+            android:singleLine="true"
+            android:maxLines="1"
+            android:layout_marginTop="15dp"
+            android:hint="Description"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:id="@+id/DescriptionBottomsheet"/>
+
         <LinearLayout
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
@@ -60,7 +70,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/bottomSheetShare"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="25dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/ic_share"/>
@@ -73,7 +83,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/bottomSheetCopy"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="25dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/ic_copy"/>
@@ -81,5 +91,4 @@
         </LinearLayout>
     </LinearLayout>
     </LinearLayout>
-
 </FrameLayout>

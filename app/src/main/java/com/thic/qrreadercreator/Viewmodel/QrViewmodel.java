@@ -14,8 +14,11 @@ import java.util.List;
 
 public class QrViewmodel extends AndroidViewModel {
 
+    private static MutableLiveData<List<model>>selectedList = new MutableLiveData<>();
     private QrRepository repository;
     private LiveData<List<model>> allModel;
+    private static MutableLiveData<Boolean>singleSelect = new MutableLiveData<>();
+
 
     public QrViewmodel(@NonNull Application application) {
         super(application);
@@ -39,22 +42,35 @@ public class QrViewmodel extends AndroidViewModel {
         return allModel;
     }
 
-    MutableLiveData<model> pushDataModel = new MutableLiveData<>();
-    MutableLiveData<Boolean>progressShow = new MutableLiveData<>();
-
-    public MutableLiveData<Boolean> getProgressShow() {
-        return this.progressShow;
+    public static MutableLiveData<List<model>> getSelectedList() {
+        return selectedList;
     }
 
-    public void setProgressShow(Boolean bool) {
-        this.progressShow.setValue(bool);
+    public static void setSelectedList(List<model> selectList) {
+        selectedList.setValue(selectList);
     }
+
+    public MutableLiveData<Boolean> getSingleSelect() {
+        return singleSelect;
+    }
+
+    public static void setSingleSelect(boolean bool) {
+        singleSelect.setValue(bool);
+    }
+
+    static MutableLiveData<model> pushDataModel = new MutableLiveData<>();
+    public static MutableLiveData<Boolean>actionModeİsActive = new MutableLiveData<>();
 
     public model getPushDataModel() {
         return this.pushDataModel.getValue();
     }
 
-    public void setPushDataModel(model model) {
-        this.pushDataModel.setValue(model);
+    public static void setPushDataModel(model model) {
+        pushDataModel.setValue(model);
+    }
+
+    public String toolbarTitle (){
+        String title = selectedList.getValue().size()+" Selected";
+        return title;
     }
 }

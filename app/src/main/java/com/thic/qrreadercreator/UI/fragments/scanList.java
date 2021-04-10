@@ -21,9 +21,9 @@ import java.util.List;
 
 public class scanList extends Fragment {
 
-    RecyclerView recyclerView;
-    recyclerViewAdapter adapter;
-    QrViewmodel viewmodel;
+    private RecyclerView recyclerViewS;
+    private recyclerViewAdapter adapterS;
+    private QrViewmodel viewmodel;
 
     public scanList() {
     }
@@ -41,16 +41,24 @@ public class scanList extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_scan_list, container, false);
 
-        recyclerView = root.findViewById(R.id.recyclerview_ScanList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setHasFixedSize(true);
-        adapter = new recyclerViewAdapter(true);
-        recyclerView.setAdapter(adapter);
+        recyclerViewS = root.findViewById(R.id.recyclerview_ScanList);
+        recyclerViewS.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerViewS.setHasFixedSize(true);
+        adapterS = new recyclerViewAdapter(true);
+        recyclerViewS.setAdapter(adapterS);
 
         viewmodel.getAllNote().observe(getViewLifecycleOwner(), new Observer<List<model>>() {
             @Override
             public void onChanged(List<model> models) {
-                adapter.setQR(models);
+                adapterS.setQR(models,true);
+            }
+        });
+
+        QrViewmodel.actionModeİsActive.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                recyclerViewAdapter.actionActive = aBoolean;
+                adapterS.notifyDataSetChanged();
             }
         });
 

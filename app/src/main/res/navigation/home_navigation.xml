@@ -58,6 +58,9 @@
             android:id="@+id/listhome_to_home"
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/fragment_fade_enter" />
+        <action
+            android:id="@+id/action_homeListFragment_to_bottomSheet"
+            app:destination="@id/bottomSheet" />
     </fragment>
     <dialog
         android:id="@+id/bottomSheet"
@@ -70,5 +73,8 @@
         <action
             android:id="@+id/action_bottomSheet_to_generateFragment"
             app:destination="@id/generateFragment" />
+        <action
+            android:id="@+id/action_bottomSheet_to_homeListFragment"
+            app:destination="@id/homeListFragment" />
     </dialog>
 </navigation>

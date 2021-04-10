@@ -3,7 +3,6 @@ package com.thic.qrreadercreator.UI.fragments;
 import android.Manifest;
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,6 +14,7 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +22,6 @@ import android.widget.Toast;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -31,8 +30,9 @@ import com.thic.qrreadercreator.R;
 import com.thic.qrreadercreator.Viewmodel.QrViewmodel;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
@@ -44,9 +44,11 @@ public class bottomSheet extends BottomSheetDialogFragment {
     private static boolean mPermissionGranted;
     private QRGEncoder encoder;
     private TextView qrValue;
+    private EditText description;
     private AppCompatButton save,copy,share;
     private QrViewmodel viewmodel;
     private static Uri uri;
+    private static boolean isNotFirst = false;
     private Intent intent;
     private ProgressBar progressBar;
 
@@ -74,20 +76,22 @@ public class bottomSheet extends BottomSheetDialogFragment {
         copy = root.findViewById(R.id.bottomSheetCopy);
         share = root.findViewById(R.id.bottomSheetShare);
         progressBar = root.findViewById(R.id.progressBar);
+        description = root.findViewById(R.id.DescriptionBottomsheet);
         progressBar.setVisibility(View.INVISIBLE);
 
         model incomingData = viewmodel.getPushDataModel();
+        if (!incomingData.getDescription().trim().isEmpty()){
+            isNotFirst =true;
+        }else isNotFirst=false;
 
-        // IncomingData is Scan or is Generate ? (If generate hide copy button)
-        if (incomingData.isScan() ==false){
-            copy.setVisibility(View.GONE);
-        }else {
-            copy.setVisibility(View.VISIBLE);
-        }
         encoder = new QRGEncoder(incomingData.getValue(),null, QRGContents.Type.TEXT,500);
         qrValue.setText(incomingData.getValue());
         roundedImageView.setImageBitmap(encoder.getBitmap());
-        uri =getImageUri(requireActivity(),encoder.getBitmap());
+
+        if (isNotFirst==true){
+            description.setVisibility(View.GONE);
+        }else description.setVisibility(View.VISIBLE);
+
 
         share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +111,7 @@ public class bottomSheet extends BottomSheetDialogFragment {
                 }
                 if (mPermissionGranted ==true){
                     progressBar.setProgress(60,true);
+                    uri =getImageUri(requireActivity(),encoder.getBitmap());
                     shareQR(intent,uri,incomingData);
                     progressBar.setProgress(99,true);
                 }
@@ -119,15 +124,23 @@ public class bottomSheet extends BottomSheetDialogFragment {
             public void onClick(View v) {
                 ClipData clip = ClipData.newPlainText("text", incomingData.getValue());
                 clipboard.setPrimaryClip(clip);
-                Toast.makeText(getActivity(),"Copy Succesfull",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),"Copied!",Toast.LENGTH_LONG).show();
             }
         });
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewmodel.insert(incomingData);
-                Navigation.findNavController(root).navigate(R.id.bottomsheet_to_scan);
+                    if (description.getText().toString().trim().isEmpty()){
+                        incomingData.setDescription(currentDate());
+                        incomingData.setDateTime(" ");
+                        viewmodel.insert(incomingData);
+                    }
+                    else {
+                        incomingData.setDescription(description.getText().toString());
+                        incomingData.setDateTime(currentDate());
+                        viewmodel.insert(incomingData);
+                    }
             }
         });
 
@@ -145,5 +158,17 @@ public class bottomSheet extends BottomSheetDialogFragment {
         shareIntent.setType("image/*");
         //shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivity(Intent.createChooser(shareIntent, "Share QR Code"));
+    }
+    public String currentDate(){
+        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        return currentDate;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (isNotFirst){
+            QrViewmodel.setSingleSelect(false);
+        }
     }
 }

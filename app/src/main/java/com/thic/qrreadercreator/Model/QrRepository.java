@@ -10,7 +10,7 @@ import java.util.List;
 public class QrRepository {
 
     private QrDAO qrDAO ;
-    private LiveData<List<model>> Allmodel;
+    public static LiveData<List<model>> Allmodel;
 
     public QrRepository(Application application){
         QrDatabase database = QrDatabase.database(application);

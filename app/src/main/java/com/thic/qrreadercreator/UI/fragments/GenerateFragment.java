@@ -23,6 +23,10 @@ import com.thic.qrreadercreator.Model.model;
 import com.thic.qrreadercreator.R;
 import com.thic.qrreadercreator.Viewmodel.QrViewmodel;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
 
@@ -83,11 +87,9 @@ public class GenerateFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (inputValue.getText().toString().trim() != ""){
-
+                if (!inputValue.getText().toString().trim().isEmpty()){
                     viewmodel.setPushDataModel(new model(qrinput," "," ",false));
                     Navigation.findNavController(root).navigate(R.id.action_generateFragment_to_bottomSheet);
-
                 }
             }
         });

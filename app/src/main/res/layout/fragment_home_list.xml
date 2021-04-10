@@ -27,6 +27,21 @@
 
     </com.google.android.material.tabs.TabLayout>
 
+    <androidx.appcompat.widget.Toolbar
+        android:layout_alignParentTop="true"
+        android:background="@color/white"
+        android:visibility="invisible"
+        app:menu="@menu/action_menu"
+        android:id="@+id/homeListToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:gravity="left">
+
+
+
+
+    </androidx.appcompat.widget.Toolbar>
+
     <androidx.viewpager.widget.ViewPager
         android:layout_above="@+id/homeListbottomLayout"
         android:id="@+id/viewPager"

@@ -25,6 +25,14 @@ public class model {
         this.isScan = isScan;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
+    }
+
     public void setQrID(int qrID) {
         this.qrID = qrID;
     }
