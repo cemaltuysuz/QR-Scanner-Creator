@@ -7,12 +7,15 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
@@ -22,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.thic.qrreadercreator.R;
+import com.thic.qrreadercreator.Viewmodel.QrViewmodel;
 
 import java.io.IOException;
 
@@ -32,6 +36,7 @@ public class homeFragment extends Fragment {
     private static boolean mPermissionGranted;
     private AppCompatImageView openListButton;
     private AppCompatButton scanButton,generateButton;
+    private QrViewmodel viewmodel;
     public homeFragment() {
     }
 
@@ -39,6 +44,7 @@ public class homeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewmodel = new ViewModelProvider(this).get(QrViewmodel.class);
     }
 
     @Override
@@ -85,6 +91,26 @@ public class homeFragment extends Fragment {
             }
         });
 
+        viewmodel.getPermissionListener().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean==false){
+                    Navigation.findNavController(root).navigate(R.id.home_to_scan);
+                }
+            }
+        });
+
         return root;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (permissions[0].equals(Manifest.permission.CAMERA)
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                viewmodel.setPermissionListener(false);
+            }
+        }
     }
 }

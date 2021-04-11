@@ -8,16 +8,14 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 public class QrRepository {
-
+    //Defined
     private QrDAO qrDAO ;
-    public static LiveData<List<model>> Allmodel;
     public static LiveData<List<model>> AllScanModel;
     public static LiveData<List<model>> AllGenerateModel;
 
     public QrRepository(Application application){
         QrDatabase database = QrDatabase.database(application);
          qrDAO = database.qrDAO();
-         Allmodel = qrDAO.getmodelTable();
          AllScanModel = qrDAO.getScanList();
          AllGenerateModel = qrDAO.getGenerateList();
     }
@@ -26,22 +24,11 @@ public class QrRepository {
     public void insert(model insertModel){
         new InsertAsyncTask(qrDAO).execute(insertModel);
     }
-    public void update(model updateModel){
-        new UpdateAsyncTask(qrDAO).execute(updateModel);
-    }
     public void delete(model delModel){
         new DeleteAsyncTask(qrDAO).execute(delModel);
     }
 
-    public void deleteAll(){
-        new DeleteAllAsyncTask(qrDAO).execute();
-    }
-
     // LiveData Lists
-    public LiveData<List<model>> getAllModel(){
-        return Allmodel;
-    }
-
     public LiveData<List<model>> getAllScanModel(){
         return AllScanModel;
     }
@@ -62,17 +49,6 @@ public class QrRepository {
             return null;
         }
     }
-    private static class UpdateAsyncTask extends AsyncTask<model,Void,Void>{
-        private QrDAO qrDAO;
-        private UpdateAsyncTask(QrDAO qrDAO){
-            this.qrDAO =qrDAO;
-        }
-        @Override
-        protected Void doInBackground(model... scanModels) {
-            qrDAO.modelUpdate(scanModels[0]);
-            return null;
-        }
-    }
     private static class DeleteAsyncTask extends AsyncTask<model,Void,Void>{
         private QrDAO qrDAO;
         private DeleteAsyncTask(QrDAO qrDAO){
@@ -84,16 +60,4 @@ public class QrRepository {
             return null;
         }
     }
-    private static class DeleteAllAsyncTask extends AsyncTask<model,Void,Void>{
-        private QrDAO qrDAO;
-        private DeleteAllAsyncTask(QrDAO qrDAO){
-            this.qrDAO =qrDAO;
-        }
-        @Override
-        protected Void doInBackground(model... scanModels) {
-            qrDAO.modelTableDel();
-            return null;
-        }
-    }
-
 }

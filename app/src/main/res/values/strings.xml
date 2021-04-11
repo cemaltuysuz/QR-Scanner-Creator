@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">QR Reader &amp; Creator</string>
+    <string name="app_name">QR Scanner &amp; Creator</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="homeFragmentButtonScan">QR Scan</string>
@@ -7,4 +7,6 @@
     <string name="homeFragmentOr">Or</string>
     <string name="scanList">Scanned</string>
     <string name="generateList">Generated</string>
+    <string name="bottomSheetValue">Value</string>
+    <string name="bototmSheetDescription">Description</string>
 </resources>

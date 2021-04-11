@@ -37,9 +37,6 @@
         android:layout_height="?attr/actionBarSize"
         android:gravity="left">
 
-
-
-
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.viewpager.widget.ViewPager

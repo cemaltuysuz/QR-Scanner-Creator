@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.thic.qrreadercreator.Model.model;
 import com.thic.qrreadercreator.R;
@@ -32,12 +33,15 @@ import androidmads.library.qrgenearator.QRGEncoder;
 
 public class GenerateFragment extends Fragment {
 
-    private EditText inputValue;
-    private QRGEncoder encoder;
-    private static String qrinput;
-    private static Bitmap qrCode;
-    private QrViewmodel viewmodel;
+    //UI Components
     AppCompatImageView okeyButton,QrView,backButton;
+    private EditText inputValue;
+    //Other Components
+    private QRGEncoder encoder;
+    private String qrinput;
+    private Bitmap qrCode;
+    private QrViewmodel viewmodel;
+
 
     public GenerateFragment() {
     }
@@ -58,10 +62,10 @@ public class GenerateFragment extends Fragment {
         okeyButton = root.findViewById(R.id.okeyButtonGenerate);
         QrView = root.findViewById(R.id.QRCodeView);
 
+        //RealTime Encode
         inputValue.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -74,15 +78,16 @@ public class GenerateFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
+        //Backbutton Action
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(root).navigate(R.id.generate_to_home);
             }
         });
+        //Okey button Action
         okeyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +95,7 @@ public class GenerateFragment extends Fragment {
                 if (!inputValue.getText().toString().trim().isEmpty()){
                     viewmodel.setPushDataModel(new model(qrinput," "," ",0));
                     Navigation.findNavController(root).navigate(R.id.action_generateFragment_to_bottomSheet);
-                }
+                }else Toast.makeText(getActivity(),"Is Empty !",Toast.LENGTH_SHORT).show();
             }
         });
         return root;

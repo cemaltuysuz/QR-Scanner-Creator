@@ -19,9 +19,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -38,20 +41,22 @@ import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
 
 public class bottomSheet extends BottomSheetDialogFragment {
-
-    ClipboardManager clipboard ;
+    //Widgets
+    private AppCompatButton save,copy,share;
     private RoundedImageView roundedImageView;
-    private static boolean mPermissionGranted;
-    private QRGEncoder encoder;
     private TextView qrValue;
     private EditText description;
-    private AppCompatButton save,copy,share;
+    //Other Components
+    private QRGEncoder encoder;
     private QrViewmodel viewmodel;
-    private static Uri uri;
-    private static boolean isNotFirst = false;
+    private Uri uri;
     private Intent intent;
-    private ProgressBar progressBar;
+    ClipboardManager clipboard;
+    //Check Components
+    private static boolean mPermissionGranted;
+    private static boolean isNotFirst = false;
 
+    //Empty Constructor
     public bottomSheet() {
     }
 
@@ -75,9 +80,7 @@ public class bottomSheet extends BottomSheetDialogFragment {
         save = root.findViewById(R.id.bottomSheetSave);
         copy = root.findViewById(R.id.bottomSheetCopy);
         share = root.findViewById(R.id.bottomSheetShare);
-        progressBar = root.findViewById(R.id.progressBar);
         description = root.findViewById(R.id.DescriptionBottomsheet);
-        progressBar.setVisibility(View.INVISIBLE);
 
         model incomingData = viewmodel.getPushDataModel();
         if (!incomingData.getDescription().trim().isEmpty()){
@@ -96,8 +99,6 @@ public class bottomSheet extends BottomSheetDialogFragment {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                progressBar.setProgress(30,true);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.WRITE_EXTERNAL_STORAGE)
                             != PackageManager.PERMISSION_GRANTED) {
@@ -110,12 +111,9 @@ public class bottomSheet extends BottomSheetDialogFragment {
                     mPermissionGranted = true;
                 }
                 if (mPermissionGranted ==true){
-                    progressBar.setProgress(60,true);
                     uri =getImageUri(requireActivity(),encoder.getBitmap());
                     shareQR(intent,uri,incomingData);
-                    progressBar.setProgress(99,true);
                 }
-                progressBar.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -145,6 +143,16 @@ public class bottomSheet extends BottomSheetDialogFragment {
             }
         });
 
+        viewmodel.getPermissionListener().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean){
+                    uri =getImageUri(requireActivity(),encoder.getBitmap());
+                    shareQR(intent,uri,incomingData);
+                }
+            }
+        });
+
         return root;
     }
     public Uri getImageUri(Context inContext, Bitmap inImage) {
@@ -166,10 +174,14 @@ public class bottomSheet extends BottomSheetDialogFragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (isNotFirst){
-            QrViewmodel.setSingleSelect(false);
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 2) {
+            if (permissions[0].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                viewmodel.setPermissionListener(true);
+            }
         }
     }
 }

@@ -21,7 +21,5 @@ public class Container extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_container);
 
-
-
     }
 }

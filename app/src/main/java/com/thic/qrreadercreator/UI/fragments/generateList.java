@@ -22,6 +22,7 @@ import java.util.List;
 
 public class generateList extends Fragment {
 
+    //Define variable
     private QrViewmodel viewmodel;
     private RecyclerView recyclerViewG;
     private adapterGenerate adapterG;
@@ -39,6 +40,8 @@ public class generateList extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_generate_list, container, false);
+
+        //Initialize variable
 
         recyclerViewG = root.findViewById(R.id.recyclerview_GenerateList);
         recyclerViewG.setLayoutManager(new LinearLayoutManager(getActivity()));

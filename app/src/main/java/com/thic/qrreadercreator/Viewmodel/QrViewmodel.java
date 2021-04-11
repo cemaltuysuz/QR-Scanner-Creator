@@ -18,10 +18,12 @@ public class QrViewmodel extends AndroidViewModel {
     private static MutableLiveData<List<model>> ScanSelectedList = new MutableLiveData<>();
     private static MutableLiveData<List<model>> GenerateSelectedList = new MutableLiveData<>();
     private static MutableLiveData<Boolean>singleSelect = new MutableLiveData<>();
+    private MutableLiveData<Boolean> permissionListener = new MutableLiveData<>();
 
     private QrRepository repository;
     private LiveData<List<model>> allScanModel;
     private LiveData<List<model>> allGenerateModel;
+
 
     public QrViewmodel(@NonNull Application application) {
         super(application);
@@ -35,13 +37,9 @@ public class QrViewmodel extends AndroidViewModel {
         repository.insert(model);
     }
     public void update(model model){
-        repository.update(model);
     }
     public void del(model model){
         repository.delete(model);
-    }
-    public void delAll(){
-        repository.deleteAll();
     }
 
     //Get Lists
@@ -89,4 +87,14 @@ public class QrViewmodel extends AndroidViewModel {
     //ActionMode Mutable Live data
     public static MutableLiveData<Boolean>actionModeİsActive = new MutableLiveData<>();
 
+    //Permission Request Listener
+
+
+    public MutableLiveData<Boolean> getPermissionListener() {
+        return permissionListener;
+    }
+
+    public void setPermissionListener(Boolean bool) {
+        this.permissionListener.setValue(bool);
+    }
 }

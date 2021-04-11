@@ -32,8 +32,8 @@ public class homeListFragment extends Fragment {
     private ViewPager pager;
     private AppCompatImageView closeListHome;
     private List<Fragment> fmList;
-    TabLayout tabLayout;
-    QrViewmodel viewmodel;
+    private TabLayout tabLayout;
+    private QrViewmodel viewmodel;
     private Toolbar toolbar;
 
     //Adapters Control

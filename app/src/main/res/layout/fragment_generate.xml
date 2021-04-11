@@ -45,8 +45,9 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
+        android:background="@color/grey_200"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:id="@+id/generateBottomLayout"
         android:orientation="vertical"
         android:gravity="center"
@@ -62,7 +63,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/okeyButtonGenerate"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="20dp"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
