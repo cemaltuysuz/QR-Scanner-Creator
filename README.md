@@ -1,5 +1,8 @@
 # QR-Scanner-Creator
 
+![](https://i.hizliresim.com/MqETRp.png)
+
+
 
 ##   Features
 
