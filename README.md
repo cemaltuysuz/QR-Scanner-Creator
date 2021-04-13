@@ -14,7 +14,7 @@
 - liveData
 - Navigation
 
-##   Third Part Library
+##   Third Party Library
 
 - https://github.com/yuriy-budiyev/code-scanner
 - https://github.com/androidmads/QRGenerator
