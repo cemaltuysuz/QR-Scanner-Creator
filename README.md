@@ -12,9 +12,8 @@
 
 ##   What i did use ?
 
+- MVVM
 - Room
-- Viewmodel
-- liveData
 - Navigation
 
 ##   Third Party Library
