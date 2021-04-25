@@ -21,6 +21,10 @@
 - https://github.com/yuriy-budiyev/code-scanner
 - https://github.com/androidmads/QRGenerator
 
+##   Google Play
+
+- https://play.google.com/store/apps/details?id=com.thic.qrreadercreator
+
 
 
 
